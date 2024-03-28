@@ -2,5 +2,6 @@
   "name": "monkey-scripts",
   "scripts": {
     "build": "pnpm -r --filter=./packages/* build"
-  }
+  },
+  "packageManager": "pnpm@8.15.5"
 }
