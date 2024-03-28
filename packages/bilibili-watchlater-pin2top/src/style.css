@@ -1,0 +1,19 @@
+/* 从 `.watch-later-list header .s-btn` 抄的 */
+.pin2top-btn {
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #00a1d6;
+  display: inline-block;
+  padding: 5px;
+  color: #00a1d6;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 4px;
+  margin: 0 9px;
+  transition: all .2s;
+}
+
+.pin2top-btn:hover {
+  background: #00a1d6;
+  color: #fff;
+}
