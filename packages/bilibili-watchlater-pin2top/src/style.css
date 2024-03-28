@@ -17,3 +17,8 @@
   background: #00a1d6;
   color: #fff;
 }
+
+.state {
+  display: flex;
+  align-items: center;
+}
