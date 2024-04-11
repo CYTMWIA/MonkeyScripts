@@ -18,7 +18,12 @@
   color: #fff;
 }
 
-.state {
-  display: flex;
-  align-items: center;
+.pin2top-btn.del {
+  border-color: #e23d3d;
+  color: #e23d3d;
+}
+
+.pin2top-btn.del:hover {
+  background: #e23d3d;
+  color: #fff;
 }
