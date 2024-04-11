@@ -1,12 +1,13 @@
 import './style.css';
+import { bv2av } from "./video_id";
 
-function get_bvid_from_elem(elem: Element) {
+function get_bvid_from_elem(elem: Element): `BV1${string}` | null {
   let cover = elem.getElementsByClassName('av-pic')[0]
   let url = cover.getAttribute("href")
   if (url)
-    return url.substring(url.lastIndexOf("/") + 1)
+    return url.substring(url.lastIndexOf("/") + 1) as `BV1${string}`
   else
-    return ""
+    return null
 }
 
 function get_csrf_from_cookie() {
@@ -20,36 +21,61 @@ function get_csrf_from_cookie() {
   return ""
 }
 
+async function fetch_bilibili_api(input: RequestInfo | URL, init?: RequestInit | undefined) {
+  try {
+    let resp = await fetch(input, init)
+    let data = await resp.json()
+    return data.code === 0
+  } catch (error) {
+    console.log("失败", error)
+    return false
+  }
+}
+
 async function add_to_watchlater(bvid: string, csrf: string) {
   let api = "https://api.bilibili.com/x/v2/history/toview/add"
   let params = `?bvid=${bvid}&csrf=${csrf}`
   let opts: RequestInit = { method: "POST", credentials: "include", }
-  try {
-    await fetch(api + params, opts)
-  } catch (error) {
-    console.log(bvid, "失败", error)
-  }
+  return await fetch_bilibili_api(api + params, opts)
 }
 
-async function remove_from_watchlater(bvid: string, csrf: string) {
+async function remove_from_watchlater(aid: number, csrf: string) {
   let api = "https://api.bilibili.com/x/v2/history/toview/del"
-  let params = `?bvid=${bvid}&csrf=${csrf}`
+  let params = `?aid=${aid}&csrf=${csrf}`
   let opts: RequestInit = { method: "POST", credentials: "include", }
-  try {
-    await fetch(api + params, opts)
-  } catch (error) {
-    console.log(bvid, "失败", error)
-  }
+  return await fetch_bilibili_api(api + params, opts)
 }
 
 async function pin_to_top(elem: Element) {
-  await add_to_watchlater(get_bvid_from_elem(elem), get_csrf_from_cookie())
+  let bvid = get_bvid_from_elem(elem)
+  if (!bvid) {
+    alert("获取 BVID 失败")
+    return
+  }
+
+  let ok = await add_to_watchlater(bvid, get_csrf_from_cookie())
+  if (!ok) {
+    alert("请求失败")
+    return
+  }
+
   if (elem.parentNode)
     elem.parentNode.prepend(elem)
 }
 
 async function remove(elem: Element) {
-  await remove_from_watchlater(get_bvid_from_elem(elem), get_csrf_from_cookie())
+  let bvid = get_bvid_from_elem(elem)
+  if (!bvid) {
+    alert("获取 BVID 失败")
+    return
+  }
+
+  let ok = await remove_from_watchlater(bv2av(bvid), get_csrf_from_cookie())
+  if (!ok) {
+    alert("请求失败")
+    return
+  }
+
   if (elem.parentNode)
     elem.parentNode.removeChild(elem)
   // 滚动，触发下方视频的封面获取
