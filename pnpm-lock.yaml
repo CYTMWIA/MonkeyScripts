@@ -8,8 +8,23 @@ importers:
 
   .: {}
 
+  packages/bilibili-comment-warning:
+    devDependencies:
+      typescript:
+        specifier: ^5.3.3
+        version: 5.4.4
+      vite:
+        specifier: ^5.0.11
+        version: 5.2.6
+      vite-plugin-monkey:
+        specifier: ^3.5.1
+        version: 3.5.2(vite@5.2.6)
+
   packages/bilibili-watchlater-pin2top:
     devDependencies:
+      typescript:
+        specifier: ^5.3.3
+        version: 5.4.4
       vite:
         specifier: ^5.0.11
         version: 5.2.6

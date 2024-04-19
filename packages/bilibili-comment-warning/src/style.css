@@ -1,0 +1,18 @@
+.comment-warning-container {
+  position: sticky;
+  top: 50%;
+  z-index: 9999;
+  opacity: 80%;
+
+  cursor: default;
+
+  color: red;
+  font-size: x-large;
+  text-align: center;
+
+  padding: 1em;
+  background: white;
+  border: dashed;
+  border-width: 0.4em;
+  border-color: red;
+}
