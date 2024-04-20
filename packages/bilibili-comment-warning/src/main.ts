@@ -1,6 +1,6 @@
 import './style.css'
 
-let WARNING_TEXT = "/// 警告！您已进入评论区，请自重 ///"
+let WARNING_TEXT = "/// 警告！您已进入评论区，请远离无谓的网络争吵 ///"
 
 setInterval(() => {
   let maybe_comment_container = document.getElementsByClassName("comment")
