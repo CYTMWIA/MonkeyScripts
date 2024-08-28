@@ -1,13 +1,13 @@
 .comment-warning-container {
   position: sticky;
-  top: 10%;
+  top: 40%;
   z-index: 9999;
   opacity: 80%;
 
   cursor: default;
 
   color: red;
-  font-size: x-large;
+  font-size: xx-large;
   text-align: center;
 
   padding: 1em;
